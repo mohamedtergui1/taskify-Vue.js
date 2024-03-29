@@ -35,7 +35,7 @@
                 <div class="text-center">
 
                     <vs-button @click="createTask()" :loading="activee">
-                        Home
+                        add
                     </vs-button>
                 </div>
             </div>
@@ -68,7 +68,7 @@ export default {
         ,
         errorStatus: false
         ,
-        activee: 0
+        activee: false
     }),
     props: {
         propactive: {
@@ -76,22 +76,23 @@ export default {
             required: true,
             default: false
         },
-         id :{
-            type: Int16Array
+        Task: {
+            type: String
         }
     }
     ,
     methods: {
         createTask() {
 
-            this.activee = 1
+            this.activee = true
             axios.post('/tasks', this.task)
                 .then(response => {
-                    console.log(response.data)
+                    console.log(response.data.task)
                     this.task.name = ""
                     this.task.description = ""
                     this.task.start_date = ""
                     this.task.end_date = ""
+                    this.$emit('taskAdded', response.data.task);
                     this.active = false
                 })
                 .catch(error => {
@@ -103,10 +104,28 @@ export default {
         }
     }
     ,
+
     watch: {
-        editButtonEvent() {
-            this.active = this.propactive
+        // Watch for changes to the propactive prop
+        propactive: {
+            immediate: true,
+            handler(newValue) {
+                this.active = newValue;
+            }
+        },
+        // Watch for changes to the active data property
+        active: {
+            immediate: true,
+            handler(newValue) {
+                // Perform any action when active changes
+                this.$emit("editModalClosed", newValue);
+                // You can add your custom logic here
+            }
         }
     }
+
+
 }
+
+
 </script>
