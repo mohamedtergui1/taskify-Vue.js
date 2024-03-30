@@ -36,7 +36,7 @@
                     </template>
                 </vs-input>
 
-                <vs-button class="w-24" :loading="active = 0" > Register
+                <vs-button class="w-24" :loading="active" > Register
                 </vs-button>
             </form>
             <div class=" lg:w-1/2  pl-10 hidden lg:block ">
@@ -64,6 +64,8 @@ export default {
             errorMessage: {
                 "whrong" : ["password or email"]
             }
+            ,
+            active : false
         };
     }
     ,
@@ -74,7 +76,7 @@ export default {
     },
     methods: {
         login() {
-
+            this.active =true
             axios.post('/login', this.user)
                 .then(response => {
                     console.log(response.data)
@@ -97,6 +99,8 @@ export default {
                     }
                     this.user.password = "";
                 }).finally(() => {
+                   this.active =false
+
                 });
         }
     },

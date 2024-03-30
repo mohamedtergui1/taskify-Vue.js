@@ -87,7 +87,6 @@ export default {
             this.activee = true
             axios.post('/tasks', this.task)
                 .then(response => {
-                    console.log(response.data.task)
                     this.task.name = ""
                     this.task.description = ""
                     this.task.start_date = ""
