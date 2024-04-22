@@ -2,7 +2,7 @@
   <div class="center examplex">
     <vs-navbar center-collapsed v-model="active">
       <template #left>
-        <img style="height: 2rem;" src="OIP.jpg" alt="">
+        <img style="height: 2rem;" src="" alt="">
       </template>
       <vs-navbar-item :active="$route.fullPath  == '/'">
         <router-link to="/">Home 

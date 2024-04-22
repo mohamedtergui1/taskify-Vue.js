@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home  flex justify-center ">
     <img alt="Vue logo" src="../assets/OIP.jpg">
   </div>
 </template>
